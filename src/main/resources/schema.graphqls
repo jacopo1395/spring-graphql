@@ -1,0 +1,47 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    bookById(id: ID!): Book
+    books: [Book]!
+    authors: [Author]!
+}
+
+type Mutation{
+    upsertBook(book: BookInput!): Book!
+    upsertAuthor(author: AuthorInput!): Author!
+    deleteBook(book:BookInput!): Boolean
+    deleteAuthor(author: AuthorInput!): Boolean
+}
+
+type Book {
+    id: ID!
+    name: String
+    pageCount: Int
+    date: Date
+    author: Author
+}
+
+input BookInput {
+    id: ID
+    name: String
+    pageCount: Int
+    date: Date
+    author: AuthorInput
+}
+
+type Author {
+    id: ID!
+    firstName: String
+    lastName: String
+}
+
+input AuthorInput {
+    id: ID
+    firstName: String
+    lastName: String
+}
+
+scalar Date
